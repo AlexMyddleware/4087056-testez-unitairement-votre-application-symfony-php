@@ -80,6 +80,20 @@ class GithubUserProviderTest extends TestCase
         // --------------- 3. Assert ---------------
 
         // assert that the $user is an instance of the User class
+
+        // This checks if $user is an instance of User or an instance of a subclass of User. It is more flexible because it allows for polymorphism; that is, if you had a class Admin that extended User, $user could be an instance of Admin and this test would still pass.
         $this->assertInstanceOf(User::class, $user);
+        
+        // expect that the $user is an instance of the User class
+        
+        // This checks if the exact class of $user is User. It does not allow for polymorphism; that is, if $user were an instance of a subclass of User (like Admin from before), this test would fail, even though $user is technically an instance of User through inheritance.
+        $this->assertEquals('App\Entity\User', get_class($user));
+        
+        // create an expected user object
+        $expectedUser = new User($userData['login'], $userData['name'], $userData['email'], $userData['avatar_url'], $userData['html_url']);
+        // expect that the $user is equal to the $expectedUser
+        $this->assertEquals($expectedUser, $user);
+
+
     }
 }
