@@ -15,43 +15,9 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class GithubUserProviderTest extends TestCase
 {
-    // private GithubUserProvider $githubUserProvider;
-
-    // protected function setUp(): void
-    // {
-    //     $mock = new MockHandler([
-    //         new Response(200, [], '{
-    //             "login": "test",
-    //             "name": "test",
-    //             "email": "test@gmail.com",
-    //             "avatar_url": "test",
-    //             "html_url": "test"
-    //         }'),
-    //     ]);
-
-    //     $handlerStack = HandlerStack::create($mock);
-    //     $client = new Client(['handler' => $handlerStack]);
-
-    //     $serializer = $this->createMock(SerializerInterface::class);
-
-    //     $this->githubUserProvider = new GithubUserProvider($client, $serializer);
-    // }
-
-    // public function testLoadUserByUsername(): void
-    // {
-    //     $user = $this->githubUserProvider->loadUserByUsername('test');
-
-    //     $this->assertInstanceOf(User::class, $user);
-    //     $this->assertEquals('test', $user->getUsername());
-    //     $this->assertEquals('test', $user->getFullname());
-    //     $this->assertEquals('test@gmail.com"', $user->getEmail());
-    //     $this->assertEquals('test', $user->getAvatarUrl());
-    //     $this->assertEquals('test', $user->getProfileHtmlUrl());
-    // }
 
     public function testLoadUserByUsernameReturningAUser()
     {
-
         // --------------- 1. Arrange ---------------
         $streamedResponse = $this
         // get a mock builder for the StreamInterface class
