@@ -24,7 +24,10 @@ class GithubUserProviderTest extends TestCase
         ->getMockBuilder('Psr\Http\Message\StreamInterface')
         ->getMock();
 
-        $streamedResponse->method('getContents')->willReturn('foo');
+        $streamedResponse
+        ->expects($this->once()) // Nous nous attendons à ce que la méthode getContents soit appelée une fois
+        ->method('getContents')
+        ->willReturn('foo');
         
         // create a mock of the ResponseInterface class
         $response = $this
@@ -32,7 +35,10 @@ class GithubUserProviderTest extends TestCase
             ->getMockBuilder('Psr\Http\Message\ResponseInterface')
             ->getMock();
 
-        $response->method('getBody')->willReturn($streamedResponse);
+        $response
+        ->expects($this->once()) // Nous nous attendons à ce que la méthode getBody soit appelée une fois
+        ->method('getBody')
+        ->willReturn($streamedResponse);
 
         // create a mock of the Client class by guzzlehttp
         $client = $this->getMockBuilder('GuzzleHttp\Client')
@@ -42,7 +48,10 @@ class GithubUserProviderTest extends TestCase
             ->getMock();
 
         // make sure that the method get will return a response
-        $client->method('get')->willReturn($response);
+        $client
+        ->expects($this->once()) // Nous nous attendons à ce que la méthode get soit appelée une fois
+            ->method('get')
+            ->willReturn($response);
 
         // create a mock of the SerializerInterface class
         $serializer = $this
@@ -54,7 +63,10 @@ class GithubUserProviderTest extends TestCase
             ->getMock();
             // get fake data for the deserializer
             $userData = ['login' => 'a login', 'name' => 'user name', 'email' => 'adress@mail.com', 'avatar_url' => 'url to the avatar', 'html_url' => 'url to profile'];
-            $serializer->method('deserialize')->willReturn($userData);
+        $serializer
+        ->expects($this->once()) // Nous nous attendons à ce que la méthode deserialize soit appelée une fois
+        ->method('deserialize')
+        ->willReturn($userData);
         
         // --------------- 2. Act ---------------
         
