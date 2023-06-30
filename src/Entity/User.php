@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use JetBrains\PhpStorm\Pure;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -45,6 +46,11 @@ class User implements UserInterface
      * @ORM\Column
      */
     private string $profileHtmlUrl;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FoodRecord", mappedBy="user")
+     */
+    private Collection $foodRecords;
 
     #[Pure]
     public function __construct($username, $fullname, $email, $avatarUrl, $profileHtmlUrl)

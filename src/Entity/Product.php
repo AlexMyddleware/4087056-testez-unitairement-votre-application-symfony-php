@@ -8,6 +8,10 @@ class Product
 {
     const FOOD_PRODUCT = 'food';
 
+    private $name;
+    private $type;
+    private $price;
+
     public function __construct($name, $type, $price)
     {
         $this->name = $name;
